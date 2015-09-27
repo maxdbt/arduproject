@@ -32,13 +32,10 @@ void setup() {
   }
   
   tweets = new StringList();
-//  connectTwitter();
-//  twitter.addListener(listener);
-//  if (keywords.length==0) twitter.sample();
-//  else twitter.filter(new FilterQuery().track(keywords));
-  
-  
-  
+  connectTwitter();
+  twitter.addListener(listener);
+  if (keywords.length==0) twitter.sample();
+  else twitter.filter(new FilterQuery().track(keywords));
 }
 
 void draw(){
@@ -47,8 +44,14 @@ void draw(){
 text("ci sono " + tweets.size() + " messaggi in attesa", 10, 30); 
 fill(0, 102, 153);
  if(tweets.size() >0){
- println("ci sono " + tweets.size() + " messaggi in attesa"); 
+ println("ci sono " + tweets.size() + " messaggi in attesa");
+ int ypos = 70;
+for(String s : tweets){
+       println(s);
+       text(s, 10, ypos); 
+       ypos = ypos + 40;
  } 
+}
 }
 
 void stampaTutto(){
