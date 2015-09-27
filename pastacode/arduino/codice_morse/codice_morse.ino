@@ -12,8 +12,8 @@
 char stringToMorseCode[] = "SOS";
 
 // Create variable to define the output pins
-int led12 = 13;      // blink an led on output 12
-int led6 = 7;        // blink an led on output 6
+int led12 = 12;      // blink an led on output 12
+int led6 = 6;        // blink an led on output 6
 int audio8 = 8;      // output audio on pin 8
 int note = 1200;      // music note/pitch
 
@@ -32,7 +32,8 @@ int note = 1200;      // music note/pitch
 				http://www.nu-ware.com/NuCode%20Help/index.html?m...
 */
 int dotLen = 100;     // length of the morse code 'dot'
-int dashLen = dotLen * 3;    // length of the morse code 'dash'
+//int dashLen = dotLen * 3;    // length of the morse code 'dash'
+int dashLen = dotLen;
 int elemPause = dotLen;  // length of the pause between elements of a character
 int Spaces = dotLen * 3;     // length of the spaces between characters
 int wordPause = dotLen * 7;  // length of the pause between words
@@ -66,7 +67,7 @@ void loop()
 void MorseDot()
 {
   digitalWrite(led12, HIGH);  	// turn the LED on 
-  digitalWrite(led6, HIGH); 
+//  digitalWrite(led6, HIGH); 
   //tone(audio8, note, dotLen);	// start playing a tone
   delay(dotLen);             	// hold in this position
 }
@@ -74,7 +75,7 @@ void MorseDot()
 // DASH
 void MorseDash()
 {
-  digitalWrite(led12, HIGH);  	// turn the LED on 
+//  digitalWrite(led12, HIGH);  	// turn the LED on 
   digitalWrite(led6, HIGH);
   //tone(audio8, note, dashLen);	// start playing a tone
   delay(dashLen);               // hold in this position
