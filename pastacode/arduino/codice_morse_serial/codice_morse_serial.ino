@@ -14,6 +14,7 @@
 // Create variable to define the output pins
 int led12 = 12;      // blink an led on output 12
 int led6 = 6;        // blink an led on output 6
+int btnPin = 9;
 int audio8 = 8;      // output audio on pin 8
 int note = 1200;      // music note/pitch
 
@@ -42,6 +43,7 @@ int wordPause = dotLen * 7;  // length of the pause between words
 String inputString = "";         // a string to hold incoming data
 boolean stringComplete = false;  // whether the string is complete
 
+int btn_old = LOW;
 // the setup routine runs once when you press reset:
 void setup() {                
      // initialize serial:
@@ -51,11 +53,18 @@ void setup() {
   // initialize the digital pin as an output for LED lights.
   pinMode(led12, OUTPUT); 
   pinMode(led6, OUTPUT); 
+  pinMode(btnPin, INPUT);
 }
 
 // Create a loop of the letters/words you want to output in morse code (defined in string at top of code)
 void loop()
 { 
+  int btn = digitalRead(btnPin);
+  if(btn == HIGH && btn_old == LOW){
+    Serial.println("OK");
+  }
+  btn_old = btn;
+  
   //cosa fare quando arriva una stringa completa
    if (stringComplete) {
      Serial.println("ricevuto");
@@ -63,7 +72,7 @@ void loop()
    char stringToMorseCode[inputString.length()];
    inputString.toCharArray(stringToMorseCode,inputString.length());
     Serial.println(stringToMorseCode);
-    for (int i = 0; i < inputString.length() - 2; i++)
+    for (int i = 0; i < inputString.length() - 1; i++)
   {
     // Get the character in the current position
 	char tmpChar = stringToMorseCode[i];
@@ -73,6 +82,8 @@ void loop()
 	GetChar(tmpChar);
 Serial.println(i);
   }
+ // LightsOff(100);
+  Serial.println("pronto");
     // clear the string:
     inputString = "";
     stringComplete = false;
