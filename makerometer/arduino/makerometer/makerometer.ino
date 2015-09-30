@@ -12,17 +12,18 @@ int allpos[35];
 void setup()
 {
   Serial.begin(9600);
-  for( int i =0; i < NBR_SERVOS; i++)
+  for( int i =0; i < NBR_SERVOS; i++){
     Servos[i].attach( FIRST_SERVO_PIN +i);
+  }
     muoviTutti(5);
 }
 void loop()
 { 
 
  while (Serial.available() > 0) {
- if (Serial.read() == 'y'){
-   muoviTutti(90);
- }
+// if (Serial.read() == 'y'){
+//   muoviTutti(90);
+// }
     // look for the next valid integer in the incoming serial stream:
     for(int k = 0; k < NBR_SERVOS; k++){
     allpos[k] = Serial.parseInt();
@@ -32,9 +33,9 @@ void loop()
     if (Serial.read() == 'x') {
       Serial.println("entra");
     for( int i = 0; i <NBR_SERVOS; i++){ 
-    Servos[i].write(allpos[i]);   
+    Servos[i].write(map(allpos[i],0,100,0,180));   
     Serial.println(allpos[i]);
-  delay(15); 
+  //delay(15); 
     }
          
     }

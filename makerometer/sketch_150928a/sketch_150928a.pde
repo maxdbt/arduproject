@@ -17,7 +17,7 @@ void setup() {
 void draw(){
 switch(type) {
   case 0: 
-    println("Zero");  // Does not execute
+   // println("Zero");  // Does not execute
     break;
   case 1: 
     println("Uno");  // Prints "One"
@@ -71,8 +71,10 @@ void esegui(){
     int id = makerval.getInt("id");
     int tipo = makerval.getInt("type");
     String values = makerval.getString("values");
+    String send = values + "x";
+    myPort.write(send);
 
     println(id + ", " + values );
-    delay(2000);
+    delay(200);
   }
 }
