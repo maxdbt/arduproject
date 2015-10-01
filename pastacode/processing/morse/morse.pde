@@ -1,5 +1,5 @@
 import processing.serial.*; // librerie seriali di Processing
-import controlP5.*;
+
 
 
 Serial myPort;        // The serial port
@@ -17,7 +17,7 @@ static String AccessToken = "14461407-YLf56NbfkR1h7f4cSluT4w0qgagEyzTyglKvJfx5o"
 static String AccessTokenSecret = "IuC1qCtYzyDTd0ZIAIIi7SCbn3Fyk2HY0dGFmo8QBcoMA";
 
 // if you enter keywords here it will filter, otherwise it will sample
-String keywords[] = {"#work","@mdbt"
+String keywords[] = {"#work"
 };
 
 TwitterStream twitter = new TwitterStreamFactory().getInstance();
@@ -150,7 +150,7 @@ StatusListener listener = new StatusListener() {
   
     if (status.getText() != null){
       String testo = status.getText();
-     // println("tweet " +testo);
+     println("tweet " +testo);
       int iment = testo.indexOf("@mdbt");
      
      if(iment >= 0){
