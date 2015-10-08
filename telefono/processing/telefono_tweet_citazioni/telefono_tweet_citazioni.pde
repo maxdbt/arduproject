@@ -78,7 +78,7 @@ String inString = myPort.readStringUntil('\n');
  if(inString.equals("alzata") == true){
    println("leggi");
    leggi = true;
-   delay(1000); // tempo per alzare la cornetta
+   delay(500); // tempo per alzare la cornetta
    int tot_fr = (frasi.size() - 1);
    
    int rand = int(random(tot_fr));
