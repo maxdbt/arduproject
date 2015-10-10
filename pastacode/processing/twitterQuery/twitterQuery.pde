@@ -9,7 +9,7 @@ import processing.serial.*; // librerie seriali di Processing
 Serial myPort;        // The serial port
 boolean connesso = false;
 boolean manda = true;
-
+boolean show = false;
 
 ConfigurationBuilder   cb;
 Query query;
@@ -18,6 +18,8 @@ Twitter twitter;
 ArrayList<String> twittersList;
 ArrayList<String> twittersList_old;
 ArrayList<String> tweets = new ArrayList<String>();
+ArrayList<String> usrnames = new ArrayList<String>();
+ArrayList<String> usr_tweets = new ArrayList<String>();
 Timer             time;
 
 //Number twitters per search
@@ -46,10 +48,11 @@ void setup() {
 
   //Acreditacion
   cb = new ConfigurationBuilder();
-  cb.setOAuthConsumerKey("5PiS8pvNlaf4BjPLM1EYA");   
-  cb.setOAuthConsumerSecret("VKcWbOklUmtjhXOuxvlpXOVQV8s5QCU98FA938e0E");   
-  cb.setOAuthAccessToken("14461407-YLf56NbfkR1h7f4cSluT4w0qgagEyzTyglKvJfx5o");   
-  cb.setOAuthAccessTokenSecret("IuC1qCtYzyDTd0ZIAIIi7SCbn3Fyk2HY0dGFmo8QBcoMA");
+  //setting account @thepastacode
+  cb.setOAuthConsumerKey("dUtFHgBEpcMN8V0q9kOJ8PF6B");   
+  cb.setOAuthConsumerSecret("BZ9itSSXzW7P57HJwJ9tf16mBJlrGX2ruI7Tqh0ifOficm2dTo");   
+  cb.setOAuthAccessToken("3919910657-39UAfhU9hrcvN15MG1rEbUgB6s3wTP5dO3QhNY9");   
+  cb.setOAuthAccessTokenSecret("XGRUPpPElG5RYVLHFYXAyXRmN5n6vzB2LhPZBbxLPdIuj");
   
 
   //Make the twitter object and prepare the query
@@ -64,8 +67,11 @@ void draw() {
   background(50);
 
   //draw twitters
-   drawTwitters(tweets);
-
+  if(show){
+  drawTwitters(tweets);
+  }else{
+drawTwitters(usr_tweets);
+  }
 
   if (time.isDone()) {
     twittersList = queryTwitter(numberSearch);
@@ -94,12 +100,15 @@ void drawTwitters(ArrayList<String> tw) {
     i++;
   }
   }
+//  for(String t: tweets){
+//    println(t);
+//  }
 }
 
 ArrayList<String> queryTwitter(int nSearch) {
   ArrayList<String> twitt = new ArrayList<String>();
-
-  query = new Query("#lcutest3");
+usrnames.clear();
+  query = new Query("#famocose @thepastacode");
   query.setCount(nSearch);
   try {
     QueryResult result = twitter.search(query);
@@ -107,10 +116,21 @@ ArrayList<String> queryTwitter(int nSearch) {
     println("New Tweet : ");
     for (Status tw : tweets) {
       String msg = tw.getText();
+       //rimuovo l'hashtag
+       msg = msg.replaceAll("#","");
+       String reg = "\\s*\\bfamocose\\b";
+       msg = msg.replaceAll(reg, "");
+       msg = msg.replaceAll("@","");
+       reg = "\\s*\\bthepastacode\\b";
+       msg = msg.replaceAll(reg, "");
+       //println(k);
+      
       String usr = tw.getUser().getScreenName();
-      String twStr = "@"+usr+": "+msg;
+      //String twStr = "@"+usr+": "+msg;
+      String twStr = "@"+usr;
+      usrnames.add(twStr);
      // println(twStr);
-      twitt.add(twStr);
+      twitt.add(msg); // dentro twitt va solo il messaggio
     }
     
   }
@@ -125,7 +145,7 @@ void compare(){
    println("tw " + twittersList.size());
    println("old " + twittersList_old.size());
   //svuota();
-//  int index = 0;
+  int index = 0;
   int nuovi = 0;
   println("confronta");
 // for(String s: twittersList){
@@ -143,6 +163,7 @@ void compare(){
 if(twittersList_old.size() == 0 && twittersList.size() > 0){ // tutti i tweet ricevuti sono nuovi
 println("tutti nuovi");
   tweets = twittersList;
+  usr_tweets = usrnames;
   nuovi = twittersList.size();
 }
 if(twittersList_old.size() > 0 && twittersList.size() > 0){ // alcuni dei tweet ricevuti sono nuovi
@@ -150,7 +171,9 @@ if(twittersList_old.size() > 0 && twittersList.size() > 0){ // alcuni dei tweet 
     println(s);
     if(s.equals(twittersList_old.get(0))==false){
       nuovi = nuovi + 1;
+      usr_tweets.add(usrnames.get(index));
       tweets.add(s); 
+      index++;
     }else{
       break;
     }
@@ -215,6 +238,7 @@ void stampaTutto(){
        myPort.write(s);
      }
      tweets.clear();
+     usr_tweets.clear();
 
 }
 
@@ -225,6 +249,7 @@ void stampaUltimo(){
     tweet = tweet + "\n";   
     myPort.write(tweet);
     tweets.remove(0);
+    usr_tweets.remove(0);
 } 
   
 }
@@ -232,14 +257,18 @@ void stampaUltimo(){
 void keyPressed() {
   int k = key - 48;
   println(k);
-  if(connesso ==false){
+  if(connesso ==false && k < 10){
   println("apro seriale " + Serial.list()[k]);
   myPort = new Serial(this, Serial.list()[k], 9600);
    myPort.bufferUntil('\n');
    connesso= true;
   }else{
     //tweets.append("prova del tweet più lungo del mondo " + k);
-    tweets.add("sos" + k);
+    //tweets.add("sos" + k);
+    
+    if(k == 69){
+      show = !show;
+    }
   }
   
 }
