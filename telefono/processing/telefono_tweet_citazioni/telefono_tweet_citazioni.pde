@@ -10,14 +10,14 @@ Process process;
 
 boolean leggi = false;
 // This is where you enter your Oauth info
-static String OAuthConsumerKey = "5PiS8pvNlaf4BjPLM1EYA";
-static String OAuthConsumerSecret = "VKcWbOklUmtjhXOuxvlpXOVQV8s5QCU98FA938e0E";
+static String OAuthConsumerKey = "7TqpojOAKn9v5rws9hp1rt43K";
+static String OAuthConsumerSecret = "8wwBJdvgMQZCGiO37YCxHV4HigKId1Pj6imzbt1SieMjTvGj03";
 // This is where you enter your Access Token info
-static String AccessToken = "14461407-YLf56NbfkR1h7f4cSluT4w0qgagEyzTyglKvJfx5o";
-static String AccessTokenSecret = "IuC1qCtYzyDTd0ZIAIIi7SCbn3Fyk2HY0dGFmo8QBcoMA";
+static String AccessToken = "3911012368-3tfSxG9zdBF7vAMxiPPukQuwUJdJ8ggMIpVpvlc";
+static String AccessTokenSecret = "obCKmeJabsFo9jXD11ZGk67wFveRQqiGNTMDgUdnFKPxI";
 
 // if you enter keywords here it will filter, otherwise it will sample
-String keywords[] = {"#work","@mdbt"
+String keywords[] = {"linkmf","lcu"
 };
 
 TwitterStream twitter = new TwitterStreamFactory().getInstance();
@@ -211,12 +211,12 @@ private static AccessToken loadAccessToken() {
 StatusListener listener = new StatusListener() {
   public void onStatus(Status status) {
 
-  // println("@" + status.getUser().getScreenName() + " - " + status.getText());
+  println("@" + status.getUser().getScreenName() + " - " + status.getText());
   
     if (status.getText() != null){
       String testo = status.getText();
-     // println("tweet " +testo);
-      int iment = testo.indexOf("@mdbt");
+     println("tweet " +testo);
+      int iment = testo.indexOf("@oscarthephone");
      
      if(iment >= 0){
       println("menzione" + testo);
