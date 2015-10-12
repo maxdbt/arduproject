@@ -200,7 +200,7 @@ void svuota(){
    myPort.bufferUntil('\n');
    connesso= true;
   }else{
-    tweets.append("prova del tweet più lungo del mondo " + k);
+   // tweets.append("prova del tweet più lungo del mondo " + k);
   }
   
 }
