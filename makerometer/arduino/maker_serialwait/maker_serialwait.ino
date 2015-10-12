@@ -1,5 +1,5 @@
 #include <Servo.h>
-#define NBR_SERVOS 35  // the number of servos, up to 48 for Mega, 12 for other boards
+#define NBR_SERVOS 12  // the number of servos, up to 48 for Mega, 12 for other boards
 #define FIRST_SERVO_PIN 2 
 
 Servo Servos[NBR_SERVOS] ; // max servos is 48 for mega, 12 for other boards
@@ -24,6 +24,7 @@ while (Serial.available()) {
 int inChar = Serial.read();
 //Serial.println((char)inChar);
 if(inChar == 's'){
+  index = 0;
   Serial.println("go");
 }else{
 if(isDigit(inChar)){

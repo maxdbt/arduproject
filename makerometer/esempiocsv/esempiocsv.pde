@@ -2,13 +2,24 @@ import processing.serial.*; // librerie seriali di Processing
 Serial myPort;        // The serial port
 int ind = 0;
 StringList valArray;
+
+int interval = 5000;
+int lastRun = 0;
+
+
 void setup() {
- myPort = new Serial(this, Serial.list()[3], 9600);
-   myPort.bufferUntil('\n');
+myPort = new Serial(this, Serial.list()[3], 9600);
+myPort.bufferUntil('\n');
 }
 
 void draw() {
   background(50);
+  if(millis()- lastRun > interval){
+    lastRun = millis();
+    leggi();
+    myPort.write("s");
+  }
+  
 }
 void serialEvent (Serial myPort) {
  // get the ASCII string:
@@ -39,7 +50,7 @@ if(inString.equals("ready") && ind < valArray.size()){
 void mousePressed() {
   //TextToSpeech.say(testo, "Alice", 170);
 
-leggi();
+  leggi();
  myPort.write("s");
   
 }
