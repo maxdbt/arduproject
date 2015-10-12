@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>geolocation demo</title>
+<style>
+#map {width:100%;height:100%;}
+</style>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script>
+    $(document).ready(function(){
+    $("button").click(function(){
+alert("ciao");
+    });
+});
+ 
+ 
+    function initGeolocation() {
+ if (navigator && navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(successCallback, errorCallback);
+        } else {
+            console.log('Geolocation is not supported');
+        }
+}
+ 
+function errorCallback() {}
+ 
+function successCallback(position) {
+      var mapUrl = "http://maps.google.com/maps/api/staticmap?center=";
+      mapUrl = mapUrl + position.coords.latitude + ',' + position.coords.longitude;
+      mapUrl = mapUrl + '&zoom=15&size=512x512&maptype=roadmap&sensor=false';
+      var imgElement = document.getElementById("static-map");
+      imgElement.src = mapUrl;
+	  showPosition(position);
+    }
+
+	function showPosition(position) {
+	var x = document.getElementById("demo");
+    x.innerHTML = "Latitude: " + position.coords.latitude + 
+    "<br>Longitude: " + position.coords.longitude;	
+	
+	
+}
+	
+</script>
+</head>
+<body onload="javascript:initGeolocation()">
+
+<div>
+<p>Click the button to get your coordinates.</p>
+<button>Send an HTTP GET request to a page and get the result back</button>
+<button  onclick="manda()">1</button>
+<button onclick="manda(2)">2</button>
+<button onclick="manda(3)">3</button>
+<button onclick="manda(4)">4</button>
+<button onclick="manda(5)">5</button>
+<button onclick="manda(6)">6</button>
+<script>
+function manda(val){
+	var k = document.getElementById("demo");
+    k.innerHTML = val;	
+	}
+	
+	
+	
+	</script>
+</div>
+<div id="map">
+  <img id="static-map" src="placeholder.png" />
+  <p id="demo"></p>
+</div>
+</body>
+</html>
