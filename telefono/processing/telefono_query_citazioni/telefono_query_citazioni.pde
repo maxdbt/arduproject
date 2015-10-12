@@ -54,6 +54,46 @@ frasi.append("Mica posso fa' tutto io qua. Te lo sai oggi a che ora mi sono alza
 frasi.append("La risposta non la devi cercare fuori, la risposta è dentro di te. E però è sbagliata!");
 frasi.append("Gli ultimi saranno i primi, ma lo sportello chiude alle 12");
 frasi.append("Non rimandare a domani quello che puoi fare dopodomani");
+frasi.append("Quarantadue");
+frasi.append("Francamente me ne infischio");
+frasi.append("Gli farò un’offerta che non potrà rifiutare");
+frasi.append("Dopotutto, domani è un altro giorno");
+frasi.append("Mamma diceva sempre: la vita è come a una scatola di cioccolatini, non sai mai quello che ti capita");
+frasi.append("Sei solo chiacchiere e distintivo");
+frasi.append("Ho visto cose che voi umani non potreste immaginare");
+frasi.append("Dove stiamo andando non c’è bisogno di strade");
+frasi.append("Trovo insopportabile la tua mancanza di fede");
+frasi.append("Le avventure senza rischi sono Disneyland");
+frasi.append("Pillola azzurra: fine della storia. Pillola rossa: resti nel paese delle meraviglie");
+frasi.append("Houston: abbiamo un problema");
+frasi.append("Da un grande potere derivano grandi responsabilità");
+frasi.append("I Goonies non muoiono mai");
+frasi.append("La verità è che lei muore dalla voglia di vedere cosa c'è dentro quel coso");
+frasi.append("La vita è come un nodo creatosi nel flusso dell'informazione");
+frasi.append("I fatti possono essere fuorvianti, le chiacchiere vere o false possono essere rivelatrici");
+frasi.append("Non è tanto chi sei, quanto quello che fai, che ti qualifica");
+frasi.append("Da qualche parte tuo nonno se la starà ridendo");
+frasi.append("Il mondo ha subito cambiamenti così radicali che corriamo per tenerci al passo");
+frasi.append("L'arroganza dell'uomo è pensare che la natura sia sotto il nostro controllo");
+frasi.append("Che la Forza sia con te");
+frasi.append("Sembra che siamo fatti per soffrire, è il nostro destino nella vita");
+frasi.append("Non dovevamo atterrare su questo maledetto pianeta");
+frasi.append("Una vita finisce e un'altra comincia");
+frasi.append("Rilassati e cerca di svuotare la mente");
+frasi.append("Il più forte mangia il più debole, e nessuno muove un dito");
+frasi.append("Il mondo si sta riempiendo di esseri fuori dal comune che non possiamo controllare");
+frasi.append("Siamo una mistura chimica che produce il caos");
+frasi.append("Ti do due minuti per disegnare un labirinto che ne richieda uno per risolverlo");
+frasi.append("Beati gli smemorati, perché avranno la meglio anche sui loro errori");
+frasi.append("Parlare in continuazione non significa comunicare");
+frasi.append("La risposta è dentro di te ma è quella sbagliata");
+frasi.append("La domanda è malposta, forse te volevi chiedere: Maestro che ore sono?");
+frasi.append("Due rette parallele non si incontrano mai... e se si incontrano non si salutano");
+frasi.append("Tu come la vedi?");
+frasi.append("Gli ultimi saranno i primi, ma lo sportello chiude alle 12");
+frasi.append("Non rimandare a domani quello che puoi fare dopodomani");
+
+
   //FONT
   font = createFont("NexaLight-16.vlw", fontSize, true);
   textFont(font, fontSize);
@@ -116,7 +156,7 @@ void drawTwitters(ArrayList<String> tw) {
 ArrayList<String> queryTwitter(int nSearch) {
   ArrayList<String> twitt = new ArrayList<String>();
 
-  query = new Query("#lcutest3");
+  query = new Query("#linkcampus @oscarthephone");
   query.setCount(nSearch);
   try {
     QueryResult result = twitter.search(query);

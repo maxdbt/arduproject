@@ -1,5 +1,5 @@
 #include <Servo.h>
-#define NBR_SERVOS 4  // the number of servos, up to 48 for Mega, 12 for other boards
+#define NBR_SERVOS 7  // the number of servos, up to 48 for Mega, 12 for other boards
 #define FIRST_SERVO_PIN 2 
 
 Servo Servos[NBR_SERVOS] ; // max servos is 48 for mega, 12 for other boards
@@ -7,7 +7,7 @@ Servo Servos[NBR_SERVOS] ; // max servos is 48 for mega, 12 for other boards
 int pos = 0;      // variable to store the servo position 
 int potPin = 0;   // connect a pot to this pin.
 
-int allpos[35];
+int allpos[7];
 
 void setup()
 {
@@ -15,7 +15,7 @@ void setup()
   for( int i =0; i < NBR_SERVOS; i++){
     Servos[i].attach( FIRST_SERVO_PIN +i);
   }
-    muoviTutti(5);
+    muoviTutti(90);
 }
 void loop()
 { 
