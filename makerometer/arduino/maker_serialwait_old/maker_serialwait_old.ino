@@ -3,7 +3,7 @@
 #define FIRST_SERVO_PIN 2 
 
 Servo Servos[NBR_SERVOS] ; // max servos is 48 for mega, 12 for other boards
-
+int allpos_old[NBR_SERVOS];
 int allpos[NBR_SERVOS];
 String inputString;
 int index;
@@ -56,17 +56,55 @@ if(isDigit(inChar)){
 void muovi(){
  attacca();
   for(int i=0; i<NBR_SERVOS; i++){
-     int deg = map(allpos[i],0,100,10,170);
-     //Serial.println(allpos[i]);
-     Serial.println(deg);
-      Servos[i].write(deg); 
-      if(allpos[i] <20){
-        Servos[i].detach();
-      }
+    
+    if(allpos[i] > allpos_old[i]){
+      int deg = 0;
+     // Serial.println("magg");
+      for(int j = allpos_old[i]; j < (allpos[i] + 1) ; j++){
+         Serial.println(j);
+          deg = map(j,0,100,10,170);
+          //Serial.println(allpos[i]);
+         // Serial.println(deg);
+           Servos[i].write(deg);
+          delay(5); 
+            
+       }
+       if(deg <10){
+              Servos[i].detach();
+            }
+    }else if(allpos[i] < allpos_old[i]){
+        int deg = 0;
+      for(int j = allpos_old[i]; j > (allpos[i] -1); j--){
+        Serial.println(j);
+          int deg = map(j,0,100,10,170);
+          //Serial.println(allpos[i]);
+         // Serial.println(deg);
+           Servos[i].write(deg); 
+           delay(5); 
+            
+       }
+       if(deg <10){
+                Servos[i].detach();
+            }
+    }
+      
+    allpos_old[i] = allpos[i];  
+      
+      
+    }
+    
+    
+//     int deg = map(allpos[i],0,100,10,170);
+//     //Serial.println(allpos[i]);
+//     Serial.println(deg);
+//      Servos[i].write(deg); 
+//      if(allpos[i] <20){
+//        Servos[i].detach();
+//      }
       //delay(15);
-     }
+ //    }
  // stacca();
-   delay(50);
+  // delay(50);
      Serial.println("ready"); 
 }
 
@@ -89,6 +127,12 @@ void attacca(){
   for( int i =0; i < NBR_SERVOS; i++){
     Servos[i].attach(FIRST_SERVO_PIN +i);
   }
+}
+
+void initPos(){
+ for( int i =0; i < NBR_SERVOS; i++){
+    allpos[i] = 0;
+  } 
 }
   
   
